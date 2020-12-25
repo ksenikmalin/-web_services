@@ -1,0 +1,81 @@
+<div id="headerwrap">
+  <div id="headerwrap2">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 offset-md-2">
+        <h1 style="text-align: center;">Кулинарный дневник</h1>
+      </div>
+      <div class="col-md-8 offset-md-2">
+        <h4 style="text-align: center;">Сервис для заметок рецетов</h4>
+      </div>
+      <div class="col-md-8 offset-md-2">
+        <h6 style="text-align: center;">Для просмотра рецептов зайдите в свой аккаунт</h6>
+      </div>
+      <div>   
+      </div>
+    </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div *ngIf="!hide1">
+  <h2 class="mt-5 mb-3 d-flex justify-content-center">Ваши рецепты</h2>
+  </div>
+  <div class="row" *ngIf="!hide1">
+    <div class= "col-md-8 mx-auto">
+    <a class="btn btn-success btn-block" [routerLink]="['/addNote']" style=" background-color: red;
+    border-color: red;">Добавить новый рецепт</a >
+    </div>
+  </div>
+
+  <div class="row mt-2 mb-1"></div>
+
+  <div *ngIf="!hide1">
+    <div
+      *ngIf="loading"
+      style="height: calc(100vh - 73px - 2rem)"
+      class="container d-flex justify-content-center align-content-center"
+    >
+      <div class="spinner-border txt-gray-bread m-auto" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
+    <div class="container mt-5" *ngIf="!loading">
+      <div
+        *ngIf="!notfound; else blockNotFound"
+        class="row mt-3 justify-content-md-start justify-content-lg-between justify-content-center justify-content-xl-start"
+      >
+        <app-note
+          *ngFor="let note of notes"
+          [note]="note"
+          (del)="onDeleteNote(note.id_note)"
+          class="col-lg-6 col-xl-6 col-md-6 col-sm-12 col-xs-12"
+        ></app-note>
+      </div>
+      <br />
+      <ng-template #blockNotFound>
+        <h3 class="font-weight-normal">Дневник пуст, добавьте рецепты..</h3>
+      </ng-template>
+
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12"><h4 style="text-align: center; margin-top: 30px; margin-bottom: 20px;">О сервисе</h4></div>
+    <div class="col-sm-6">
+      <p>В этом проекте мы собрали инструменты, которые помогут 
+      создать книгу с записями ваших любимых рецептов. Здесь вы можете добавлять, 
+      изменять и удалять записи. </p>
+      <p>Дневник с избранными рецептами неудобно вести в 
+      бумажном виде, так как не всегда вы можете оказаться у себя за плитой или скинуть рецепт другу срочно. Еще из него гораздо проще сделать настоящее 
+      произведение искусства, которое не стыдно будет показать гостям или передать по наследству.</p>
+    <p>У электронных блокнотов действительно не счесть преимуществ по сравнению с традиционными бумажными. 
+      Они доступны на любых устройствах — от мобильных гаджетов до персональных компьютеров, всегда под рукой и одинаково 
+      хорошо подходят как для текстовых записей, так и для хранения голосовых заметок, фотографий и видео, составления списков дел, 
+      записи сиюминутных мыслей и свежих идей. </p>
+    </div>
+    <div class="col-sm-6"><img src="assets/pexels-cottonbro-5674144.jpg"></div>
+  </div>
+  </div>

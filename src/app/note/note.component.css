@@ -1,0 +1,6 @@
+.size {
+    height: 185px;
+    overflow: hidden; /* Обрезаем содержимое */
+    padding: 15px; /* Поля */
+    text-overflow: ellipsis; /* Многоточие */
+   }

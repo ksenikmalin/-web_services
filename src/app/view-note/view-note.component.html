@@ -1,0 +1,72 @@
+<div
+  *ngIf="loading"
+  style="height: calc(100vh - 73px - 2rem)"
+  class="container d-flex justify-content-center align-content-center"
+>
+  <div class="spinner-border txt-gray-bread m-auto" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>
+
+<div *ngIf="!loading" class="container mt-5">
+  <div
+    class="row flex-column-reverse p-3 p-lg-0 p-xl-0 flex-lg-row flex-xl-row"
+  >
+    <div class="d-flex flex-column col-lg-12 col-xl-12">
+      <div class="d-flex justify-content-between align-items-center">
+        <div>
+          <h3 class="mb-3">Наименование: {{ note.name }}</h3>
+        </div>
+      </div>
+      <div *ngIf="editOrNot; else anotherblock">
+        <div class="col-12 d-flex flex-column p-0">
+          <h3 class="mb-4 text-secondary font-weight-normal" >Описание:</h3>
+          <p>
+            {{ note.description }}
+          </p>
+        </div>
+        <div class="col-12 d-flex flex-column p-0 mt-5" *ngIf="!hide1">
+          <button class="btn btn-info mb-2" (click)="onChangeNote()" style="background-color: forestgreen;">
+            Изменить
+          </button>
+          <button class="btn btn-danger btn-danger" (click)="onDeleteNote()">
+            Удалить
+          </button>
+        </div>
+      </div>
+      <ng-template #anotherblock>
+        <form [formGroup]="formNote">
+          <div class="col-12 d-flex flex-column p-0">
+            <label for="name">Название рецепта: </label>
+            <input
+              formControlName="name"
+              type="text"
+              class="form-control my-line"
+              id="name"
+            />
+            <label for="description" >Описание: </label>
+            <textarea
+        (focus)="onSucces()"
+        formControlName="description"
+        class="form-control"
+        id="description"
+      >
+    </textarea>
+          </div>
+
+     
+          <div class="col-12 d-flex flex-column p-0" *ngIf="!hide1">
+            <br />
+            <br />
+            <button class="btn btn-success mb-2" (click)="onChangeNote()">
+              Сохранить
+            </button>
+            <button class="btn btn-danger" disabled>
+              
+              Удалить</button>
+          </div>
+        </form>
+      </ng-template>
+    </div>
+  </div>
+</div>

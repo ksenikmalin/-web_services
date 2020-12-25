@@ -1,0 +1,47 @@
+#headerwrap {
+    background: url(img/pexels-klaus-nielsen-6287575.jpg) no-repeat center top;
+    text-align: center;
+    background-attachment: relative;
+    background-position: center center;
+    min-height: 500px;
+    width: 100%;
+    background-size: cover;
+    color: #ffffff;
+  }
+
+  #headerwrap2 {
+    background-color: rgba(0, 0, 0, 0.6);
+    margin-top: -10px;
+    padding-top: 25px;
+    background-attachment: relative;
+    background-position: center center;
+    min-height: 500px;
+    width: 100%;
+    background-size: cover;
+    
+  }
+
+  .text-center{
+      text-align: center;
+  }
+  h2, h4, h6 {
+    opacity: 1; 
+  }
+
+  
+
+  .btn-success:hover {
+    color: #fff;
+    background-color: rgb(255, 193, 7, 1) !important;
+    border-color:  rgb(255, 193, 7, 1) !important;
+}
+
+.btn-block {
+    display: block;
+    width: 50%;
+    margin: 0 auto;
+}
+
+img{
+    width: 100%;
+}
