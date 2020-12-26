@@ -143,9 +143,8 @@ app.post("/api/registration", (req, res) => {
   );
 });
 
-//------- Запросы для работы с заметками -------//
 
-//Обработка получения списка заметок
+//Обработка получения списка кулинарных заметок
 app.post("/api/notes", function (req, res) {
   try {
     connection.query(
