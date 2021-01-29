@@ -1,11 +1,11 @@
-const express = require("express");
+const express = require("express"); // Express - фреймворк для Node.js
 const bodyParser = require("body-parser");
-const mysql = require("mysql2");
-const dbConfig = require("./db.config.js");
+const mysql = require("mysql2"); // Для работы с запросами MySQL
+const dbConfig = require("./db.config.js"); // Подключение настроек для БД
 const uniqueFilename = require("unique-filename");
 const serveStatic = require("serve-static");
 const history = require("connect-history-api-fallback");
-const app = express();
+const app = express(); // Создание экземпляра экспресс приложения
 const port = 8085;
 
 // Парсинг json
@@ -34,7 +34,7 @@ app.use(function (req, res, next) {
   next();
 });
 
-// Создание соединения с базой данных
+// Создание соединения с базой данных std_717
 let connection;
 connection = mysql.createPool({
   host: dbConfig.HOST,
@@ -66,10 +66,9 @@ connection.getConnection((err, connect) => {
   if (connect) connect.release();
 });
 
-//Обработка входа
+//Обработка входа пользователя
 app.post("/api/login", (req, res) => {
-  if (!req.body) return res.sendStatus(400);
-  console.log("Пришёл POST запрос для входа:");
+  if (!req.body) return res.sendStatus(400); //Пришёл POST запрос для входа
   console.log(req.body);
   connection.query(
     `SELECT * FROM users WHERE (login="${req.body.login}") AND (password="${req.body.password}")`,
@@ -80,7 +79,7 @@ app.post("/api/login", (req, res) => {
           .send("Ошибка сервера при получении пользователя по логину");
         console.log(err);
       }
-      console.log("Результаты проверки существования пользователя:");
+      //Результаты проверки существования пользователя:
       if (results !== undefined) {
         if (results[0] === undefined) {
           res.json("not exist");
@@ -94,8 +93,8 @@ app.post("/api/login", (req, res) => {
 
 // Регистрация пользователя
 app.post("/api/registration", (req, res) => {
-  if (!req.body) return res.sendStatus(400);
-  console.log("Пришёл POST запрос для пользователей:");
+  if (!req.body) return res.sendStatus(400); //Пришёл POST запрос для пользователей
+
   console.log(req.body);
   connection.query(
     `SELECT * FROM users WHERE login='${req.body.login}'`,
@@ -108,7 +107,7 @@ app.post("/api/registration", (req, res) => {
           );
         console.log(error);
       }
-      console.log("Результаты проверки существования логина:");
+      //Результаты проверки существования логина
       console.log(results[0]);
       if (results[0] === undefined) {
         connection.query(
@@ -154,7 +153,7 @@ app.post("/api/notes", function (req, res) {
           res.status(500).send("Ошибка сервера при получении заметки");
           console.log(error);
         }
-        console.log("Результаты получения заметок по пользователю");
+        //Результаты получения заметок по пользователю
         console.log(results);
         res.json(results);
       }
@@ -166,8 +165,8 @@ app.post("/api/notes", function (req, res) {
 
 // Обработка создания заметки
 app.post("/api/addNote", (req, res) => {
-  if (!req.body) return res.sendStatus(400);
-  console.log("Пришёл POST запрос для создания заметки:");
+  if (!req.body) return res.sendStatus(400); 
+  //Пришёл POST запрос для создания заметки
   console.log(req.body);
   connection.query(
     `INSERT INTO note (name, description, id_user) VALUES (?, ?, ?);`,
@@ -186,7 +185,7 @@ app.post("/api/addNote", (req, res) => {
 // Обработка удаления заметки
 app.delete("/api/deleteNote/:id_note", (req, res) => {
   if (!req.body) return res.sendStatus(400);
-  console.log("Пришёл DELETE запрос для удаления заметки:");
+  console.log("Пришёл DELETE запрос для удаления кулинарной заметки:");
   console.log(req.body);
   connection.query(
     `DELETE FROM note WHERE id_note=${req.params.id_note}`,
@@ -201,9 +200,9 @@ app.delete("/api/deleteNote/:id_note", (req, res) => {
   );
 });
 
-// Обработка получения информации об одной заметке
+// Обработка получения информации об одной кулинарной заметке
 app.post("/api/oneNote", (req, res) => {
-  if (!req.body) return res.sendStatus(400);
+  if (!req.body) return res.sendStatus(400); 
   console.log("Пришёл POST запрос для загрузки страницы о заметке:");
   console.log(req.body);
   connection.query(
